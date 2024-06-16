@@ -1,0 +1,42 @@
+# import PaginatorParts from '../fragments/paginator.fragment.graphql'
+
+fragment FaqParts on Faqs {
+  id
+  faq_title
+  slug
+  faq_description
+  faq_type
+  issued_by
+  language
+  translated_languages
+}
+query FAQs(
+  $search: String
+  $orderBy: String
+  $sortedBy: String
+  $language: String
+  $searchJoin: String
+  $faq_type: String
+  $issued_by: String
+  $first: Int = 15
+  $page: Int
+) {
+  faqs(
+    search: $search
+    orderBy: $orderBy
+    sortedBy: $sortedBy
+    language: $language
+    searchJoin: $searchJoin
+    faq_type: $faq_type
+    issued_by: $issued_by
+    first: $first
+    page: $page
+  ) {
+    data {
+      ...FaqParts
+    }
+    paginatorInfo {
+      ...PaginatorParts
+    }
+  }
+}
